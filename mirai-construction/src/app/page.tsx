@@ -1,40 +1,131 @@
-import { HeroSection } from '@/components/HeroSection';
+'use client';
+
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { LogoGrid } from '@/components/LogoGrid';
 import { NewsList } from '@/components/NewsList';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+
+const heroImages = [
+  '/images/hero-slide-1.png',
+  '/images/hero-slide-2.png',
+  '/images/hero-slide-3.png',
+];
 
 export default function Home() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
-      <HeroSection />
+      {/* Hero Section - nextcons.jp style */}
+      <section className="relative h-screen w-full overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImageIndex}
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5 }}
+            >
+              <img
+                src={heroImages[currentImageIndex]}
+                alt=""
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-      {/* Concept Section */}
-      <section className="py-28 md:py-36 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row gap-16 md:gap-20 items-center">
+        {/* Main Copy - Left aligned, large Japanese text */}
+        <div className="absolute inset-0 flex items-center z-10">
+          <div className="px-8 md:px-16 lg:px-24">
+            <motion.h1
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-black leading-[1.3] tracking-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              業界の常識を<br />
+              非常識に<br />
+              建設派遣の<br />
+              在り方を<br />
+              変えていく
+            </motion.h1>
+          </div>
+        </div>
+
+        {/* Scroll Indicator - Right side */}
+        <div className="absolute bottom-8 right-8 z-20 flex flex-col items-center gap-2">
+          <motion.div
+            className="w-px h-16 bg-black/50"
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+            style={{ transformOrigin: 'top' }}
+          />
+          <span className="text-black/70 text-xs tracking-[0.2em] [writing-mode:vertical-rl]">SCROLL</span>
+        </div>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`h-1 rounded-full transition-all ${
+                index === currentImageIndex ? 'bg-black w-8' : 'bg-black/30 w-4'
+              }`}
+              aria-label={`スライド ${index + 1}`}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Concept Section - Split layout */}
+      <section className="py-24 md:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-center">
+            {/* Left: Text */}
             <div className="w-full md:w-1/2">
-              <p className="text-xs tracking-[0.3em] text-[#10B981] font-medium mb-4">CONCEPT</p>
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 leading-tight">私たちの想い</h2>
-              <p className="text-[#555] leading-[2.2] mb-6">
-                株式会社リッチ＆ビルドは、施工管理の人材派遣を通じて建設業界に新しい風を吹き込みます。
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4">
+                CONCEPT
+              </h2>
+              <p className="text-sm text-gray-500 tracking-wide mb-10">
+                株式会社リッチ＆ビルドについて
               </p>
-              <p className="text-[#555] leading-[2.2] mb-10">
-                経験やスキルがなくても、「やり続ける力」があれば必ず成長できる。
-                若い力と情熱で、日本の建設現場をもっと元気に、もっと魅力的に。
+              <h3 className="text-xl md:text-2xl font-bold mb-6 leading-relaxed">
+                建設業界のリーダーをつくる。
+              </h3>
+              <p className="text-gray-600 leading-[2] mb-4">
+                "ゼロからの挑戦"　設備・電気のスペシャリストとして成長し、
+              </p>
+              <p className="text-gray-600 leading-[2] mb-10">
+                あなたの力で業界の未来を切り拓くリーダーになりませんか？
               </p>
               <Link
                 href="/company"
-                className="inline-flex items-center gap-2 text-sm font-medium text-[#111] hover:text-[#10B981] transition-colors"
+                className="inline-block border border-black rounded-full px-10 py-3 text-sm font-medium hover:bg-black hover:text-white transition-colors"
               >
-                VIEW MORE <ArrowRight className="w-4 h-4" />
+                VIEW MORE
               </Link>
             </div>
+
+            {/* Right: Image */}
             <div className="w-full md:w-1/2">
-              <div className="aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden">
+              <div className="aspect-[4/3] bg-gray-100 overflow-hidden">
                 <img
-                  src="/images/concept-team.png"
-                  alt="チームワーク"
+                  src="/images/concept-workers.png"
+                  alt="コンセプト"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -43,194 +134,133 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Business Section */}
-      <section className="py-28 md:py-36 bg-[#f8f8f8]">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.3em] text-[#10B981] font-medium mb-4">BUSINESS</p>
-            <h2 className="text-3xl md:text-4xl font-bold">事業内容</h2>
-          </div>
-
-          <div className="bg-white rounded-lg p-8 md:p-12 shadow-sm">
-            <div className="flex flex-col md:flex-row gap-10 items-center">
-              <div className="w-full md:w-2/5">
-                <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                  <img
-                    src="/images/business-construction.png"
-                    alt="施工管理"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-              <div className="w-full md:w-3/5">
-                <h3 className="text-2xl font-bold mb-6">施工管理人材派遣</h3>
-                <p className="text-[#555] leading-[2.2] mb-8">
-                  建築・土木・設備・電気など、あらゆる建設現場において即戦力となる施工管理技術者を派遣します。
-                  未経験者の育成から、経験豊富なベテランまで、現場のニーズに合わせた最適な人材をマッチングします。
-                </p>
-                <ul className="space-y-3 text-[#333]">
-                  <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 bg-[#10B981] rounded-full" />
-                    若手人材の積極採用・育成
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 bg-[#10B981] rounded-full" />
-                    キャリアアップ支援制度
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 bg-[#10B981] rounded-full" />
-                    安心のサポート体制
-                  </li>
-                </ul>
+      {/* Business Section - Split layout (image left, text right) */}
+      <section className="py-24 md:py-32 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-stretch">
+            {/* Left: Large Image */}
+            <div className="w-full md:w-1/2">
+              <div className="h-full min-h-[400px] md:min-h-[600px] bg-gray-100">
+                <img
+                  src="/images/business-building.png"
+                  alt="ビジネス"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
-          </div>
 
-          <div className="text-center mt-12">
-            <Link
-              href="/service"
-              className="inline-flex items-center gap-2 text-sm font-medium text-[#111] hover:text-[#10B981] transition-colors"
-            >
-              VIEW MORE <ArrowRight className="w-4 h-4" />
-            </Link>
+            {/* Right: Text */}
+            <div className="w-full md:w-1/2 flex items-center">
+              <div className="px-8 md:px-16 py-16">
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 text-right">
+                  BUSINESS
+                </h2>
+                <p className="text-sm text-gray-500 tracking-wide mb-12 text-right">
+                  事業内容
+                </p>
+                <h3 className="text-xl md:text-2xl font-bold mb-6 text-center">
+                  サブコン特化型人材派遣
+                </h3>
+                <p className="text-gray-600 leading-[2] mb-10 text-justify">
+                  株式会社リッチ＆ビルドは、"業界初"のサブコン（設備・電気）に特化した施工管理・CADオペレーターの人材派遣を行っています。未だかつてない設備・電気のプロフェッショナル集団を目指しております。
+                </p>
+                <div className="text-center">
+                  <Link
+                    href="/service"
+                    className="inline-block border border-black rounded-full px-10 py-3 text-sm font-medium hover:bg-black hover:text-white transition-colors"
+                  >
+                    VIEW MORE
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Client Section */}
-      <section className="py-28 md:py-36 bg-white">
+      <section className="py-24 md:py-32 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.3em] text-[#10B981] font-medium mb-4">CLIENT</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">取引実績</h2>
-            <p className="text-[#555]">
-              大手ゼネコン・サブコンを含む多数の企業様との取引実績があります
-            </p>
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">CLIENT</h2>
+            <p className="text-sm text-gray-500 tracking-wide">取引実績</p>
           </div>
 
           <LogoGrid logos={[
-            { src: '', alt: 'Client 1' },
-            { src: '', alt: 'Client 2' },
-            { src: '', alt: 'Client 3' },
-            { src: '', alt: 'Client 4' },
-            { src: '', alt: 'Client 5' },
-            { src: '', alt: 'Client 6' },
-            { src: '', alt: 'Client 7' },
-            { src: '', alt: 'Client 8' },
+            { src: '', alt: 'Sumitomo Densetsu' },
+            { src: '', alt: 'Hibiya' },
+            { src: '', alt: 'Konoike' },
+            { src: '', alt: 'Kandenko' },
+            { src: '', alt: 'Kyudenko' },
+            { src: '', alt: 'Nihon Denki Kogyo' },
+            { src: '', alt: 'Showa' },
+            { src: '', alt: 'Hokuriku' },
+            { src: '', alt: 'Relia' },
+            { src: '', alt: 'Techno' },
+            { src: '', alt: 'Toko' },
           ]} />
 
           <div className="text-center mt-12">
             <Link
               href="/client"
-              className="inline-flex items-center gap-2 text-sm font-medium text-[#111] hover:text-[#10B981] transition-colors"
+              className="inline-block border border-black rounded-full px-10 py-3 text-sm font-medium hover:bg-black hover:text-white transition-colors"
             >
-              VIEW MORE <ArrowRight className="w-4 h-4" />
+              VIEW MORE
             </Link>
           </div>
         </div>
       </section>
 
       {/* News Section */}
-      <section className="py-28 md:py-36 bg-[#f8f8f8]">
+      <section className="py-24 md:py-32 bg-white border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
             <div>
-              <p className="text-xs tracking-[0.3em] text-[#10B981] font-medium mb-4">NEWS</p>
-              <h2 className="text-3xl md:text-4xl font-bold">お知らせ</h2>
+              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">NEWS</h2>
+              <p className="text-sm text-gray-500 tracking-wide">お知らせ</p>
             </div>
             <Link
               href="/news"
-              className="mt-6 md:mt-0 inline-flex items-center gap-2 text-sm font-medium text-[#111] hover:text-[#10B981] transition-colors"
+              className="mt-6 md:mt-0 inline-block border border-black rounded-full px-8 py-2 text-sm font-medium hover:bg-black hover:text-white transition-colors"
             >
-              VIEW ALL <ArrowRight className="w-4 h-4" />
+              VIEW ALL
             </Link>
           </div>
           <NewsList />
         </div>
       </section>
 
-      {/* Member Section */}
-      <section className="py-28 md:py-36 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.3em] text-[#10B981] font-medium mb-4">MEMBER</p>
-            <h2 className="text-3xl md:text-4xl font-bold">経営陣</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-            {/* CEO */}
-            <div className="text-center">
-              <div className="aspect-[3/4] bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center text-gray-300 font-medium">
-                  PHOTO
-                </div>
-              </div>
-              <p className="text-xs tracking-[0.2em] text-[#10B981] font-medium mb-2">CEO</p>
-              <h3 className="text-xl font-bold mb-1">荒井 武志</h3>
-              <p className="text-sm text-[#555] mb-4">代表取締役</p>
-              <p className="text-sm text-[#555] leading-relaxed">
-                「継続は力なり」をモットーに、仲間と一緒に大きな成長を目指す会社を創る。
-              </p>
-            </div>
-
-            {/* Director */}
-            <div className="text-center">
-              <div className="aspect-[3/4] bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center text-gray-300 font-medium">
-                  PHOTO
-                </div>
-              </div>
-              <p className="text-xs tracking-[0.2em] text-[#10B981] font-medium mb-2">DIRECTOR</p>
-              <h3 className="text-xl font-bold mb-1">鵜山 康宏</h3>
-              <p className="text-sm text-[#555] mb-4">取締役</p>
-              <p className="text-sm text-[#555] leading-relaxed">
-                営業の世界で叩き上げ。23歳で起業し、現在は複数の会社を経営する実業家。
-              </p>
-            </div>
-          </div>
-
-          <div className="text-center mt-12">
-            <Link
-              href="/company"
-              className="inline-flex items-center gap-2 text-sm font-medium text-[#111] hover:text-[#10B981] transition-colors"
-            >
-              VIEW MORE <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+      {/* Contact Section - Full width background image */}
+      <section className="relative py-32 md:py-40">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/contact-bg.png"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/20" />
         </div>
-      </section>
 
-      {/* Recruit CTA Section */}
-      <section className="relative py-32 overflow-hidden bg-[#111]">
-        <div className="max-w-4xl mx-auto px-6 text-center text-white">
-          <p className="text-xs tracking-[0.3em] text-[#10B981] font-medium mb-4">RECRUIT</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">一緒に、未来を創ろう。</h2>
-          <p className="text-[#999] mb-10 leading-relaxed">
-            経験は問いません。大切なのは「やり続ける力」。<br />
-            私たちと一緒に、建設業界の新しいスタンダードを創りませんか？
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-white mb-4">
+            CONTACT
+          </h2>
+          <p className="text-sm text-white/80 tracking-wide mb-10">
+            お問い合わせ
           </p>
-          <Link
-            href="/recruit"
-            className="inline-flex items-center gap-2 bg-[#10B981] text-white px-10 py-4 rounded font-medium hover:bg-[#059669] transition-colors"
-          >
-            採用情報を見る <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
-
-      {/* Contact CTA Section */}
-      <section className="py-24 bg-white border-t border-gray-100">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-xs tracking-[0.3em] text-[#10B981] font-medium mb-4">CONTACT</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">お問い合わせ</h2>
-          <p className="text-[#555] mb-10">
-            人材に関するご相談、お見積もりなど、お気軽にお問い合わせください。
+          <p className="text-white/90 leading-[2] mb-10">
+            施工管理・CADオペレーターに関するお問い合わせやお悩みなど、お気軽にご相談ください。
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 border border-[#111] text-[#111] px-10 py-4 rounded font-medium hover:bg-[#111] hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 bg-[#DC2626] text-white px-10 py-4 rounded-full font-medium hover:bg-[#B91C1C] transition-colors"
           >
-            お問い合わせはこちら <ArrowRight className="w-4 h-4" />
+            VIEW MORE
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </Link>
         </div>
       </section>
