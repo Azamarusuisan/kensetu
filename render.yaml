@@ -2,6 +2,7 @@ services:
   - type: web
     name: mirai-construction
     runtime: node
+    rootDir: mirai-construction
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:

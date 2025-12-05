@@ -20,7 +20,8 @@ export default function CompanyPage() {
                             <div className="relative">
                                 <p className="text-emerald-500 font-bold tracking-widest text-sm mb-4">MISSION</p>
                                 <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight text-[#064E3B]">
-                                    日本の施工管理業界を<br />
+                                    日本の<br />
+                                    施工管理業界を<br />
                                     新しく創る
                                 </h2>
                                 <p className="text-emerald-800/70 leading-loose text-lg">
