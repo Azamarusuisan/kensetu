@@ -1,7 +1,7 @@
 import { SubpageHero } from '@/components/SubpageHero';
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
-import { ArrowRight, Zap, Users, TrendingUp, Heart } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Users, Briefcase, GraduationCap, Heart } from 'lucide-react';
 
 export default function RecruitPage() {
     return (
@@ -9,98 +9,108 @@ export default function RecruitPage() {
             <SubpageHero
                 titleEn="RECRUIT"
                 titleJa="採用情報"
+                backgroundImage="/images/concept-workers.png"
             />
 
             {/* Intro */}
             <section className="py-24 bg-white">
                 <div className="container mx-auto px-6 max-w-4xl text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-8 leading-tight text-[#064E3B]">
-                        経験がなくても大丈夫。<br />
-                        「やり続ける力」があれば。
+                    <h2 className="text-3xl md::text-5xl font-bold mb-12 leading-tight text-[#064E3B]">
+                        未経験から、<br />
+                        一生モノのスキルを。
                     </h2>
-                    <p className="text-emerald-800/70 leading-loose text-lg text-left md:text-center">
-                        株式会社リッチ＆ビルドは、未経験から建設業界で活躍できる人材を育成しています。<br />
-                        大切なのは経験やスキルではなく、「継続する力」と「成長したい気持ち」。<br />
-                        私たちと一緒に、日本の施工管理業界を新しく創っていきませんか？
+                    <p className="text-[#064E3B]/70 leading-loose text-lg text-left md:text-center">
+                        「自分には何もない」と思っていませんか？<br />
+                        リッチ＆ビルドでは、学歴も経験も関係ありません。<br />
+                        必要なのは、「変わりたい」「成長したい」という気持ちだけ。<br />
+                        充実した研修制度と先輩たちのサポートで、<br />
+                        あなたの「なりたい自分」への第一歩を応援します。
                     </p>
                 </div>
             </section>
 
             {/* CEO Message */}
             <section className="py-24 bg-[#F0FDF4]">
-                <div className="container mx-auto px-6 max-w-6xl">
-                    <div className="flex flex-col md:flex-row items-center gap-12">
-                        <div className="w-full md:w-2/5">
-                            <div className="aspect-[3/4] bg-emerald-100 relative rounded-2xl overflow-hidden">
-                                <div className="absolute inset-0 flex items-center justify-center text-emerald-300 font-bold tracking-widest text-xl">
-                                    CEO PHOTO
+                <div className="container mx-auto px-6">
+                    <div className="max-w-6xl mx-auto">
+                        <div className="flex flex-col md:flex-row">
+                            <div className="w-full md:w-1/2 relative min-h-[500px]">
+                                <div className="absolute inset-0 bg-gray-200">
+                                    <img
+                                        src="/images/ceo_portrait.png"
+                                        alt="CEO Portrait"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                                <div className="absolute bottom-8 left-8 bg-white/90 backdrop-blur-sm p-6 rounded-xl border border-white/50 shadow-lg max-w-xs">
+                                    <p className="text-[#10B981] font-bold tracking-widest text-xs mb-1">REPRESENTATIVE DIRECTOR</p>
+                                    <p className="text-xl font-bold text-[#064E3B]">荒井 武志</p>
                                 </div>
                             </div>
-                        </div>
-                        <div className="w-full md:w-3/5">
-                            <p className="text-emerald-500 font-bold tracking-widest text-sm mb-4">CEO MESSAGE</p>
-                            <h3 className="text-3xl font-bold mb-8 text-[#064E3B]">
-                                スキルや経験がなくても、<br />
-                                誰よりも「やり続ける」ことで<br />
-                                道は開ける。
-                            </h3>
-                            <div className="space-y-4 text-emerald-800/70 leading-relaxed">
-                                <p>
-                                    僕は高校を卒業して行くところがなく、アメリカで4年間"筋肉留学"をしていました。帰国後は建築現場で働き始めたものの、腰を痛めて挫折。その後も職を転々としながら、最終的に営業の世界に辿り着きました。
-                                </p>
-                                <p>
-                                    スキルも経験もなかった僕が営業成績トップを取れたのは、ただ「誰よりもやり続けた」から。筋トレと同じで、継続すれば必ず結果は出る。そう気づいたんです。
-                                </p>
-                                <p>
-                                    建設業界は人手不足が深刻です。でも、若い力が加わればもっと面白くなる。経験がなくても、やる気と継続力があれば大丈夫。仲間と一緒に、全部デカくしていく。そんな会社を目指しています。
-                                </p>
-                            </div>
-                            <div className="mt-8 text-right">
-                                <p className="text-lg font-bold text-[#064E3B]">代表取締役</p>
-                                <p className="text-2xl font-bold text-[#064E3B]">荒井 武志</p>
+                            <div className="w-full md:w-1/2 bg-white p-12 md:p-20 flex flex-col justify-center">
+                                <p className="text-[#10B981] font-bold tracking-widest text-sm mb-6">MESSAGE</p>
+                                <h3 className="text-3xl md:text-4xl font-bold mb-8 leading-tight text-[#064E3B]">
+                                    「やり続ける力」が<br />
+                                    未来を切り拓く
+                                </h3>
+                                <div className="space-y-6 text-[#064E3B]/70 leading-relaxed">
+                                    <p>
+                                        私は、特別な才能があったわけではありません。勉強ができたわけでも、器用だったわけでもない。<br />
+                                        ただ一つ、「決めたことをやり続ける」ことだけは誰にも負けませんでした。
+                                    </p>
+                                    <p>
+                                        建設業界は今、大きな変革期を迎えています。若い力が求められています。<br />
+                                        経験がないことは、ハンデではありません。真っ白なキャンバスだからこそ、どんな色にも染まれる。<br />
+                                        無限の可能性を秘めているのです。
+                                    </p>
+                                    <p>
+                                        私たちと一緒に、地図に残る仕事をしませんか？<br />
+                                        あなたの挑戦を、全力でサポートします。
+                                    </p>
+                                </div>
+                                <div className="mt-10">
+                                    <img src="/images/sign.png" alt="Takeshi Arai Signature" className="h-12 opacity-50" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Why Rich & Build */}
+            {/* Why リッチ＆ビルド */}
             <section className="py-24 bg-white">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16">
-                        <p className="text-emerald-500 font-bold tracking-widest text-sm mb-4">WHY RICH & BUILD</p>
-                        <h2 className="text-3xl md:text-4xl font-bold text-[#064E3B]">リッチ＆ビルドで働く魅力</h2>
+                        <p className="text-[#10B981] font-bold tracking-widest text-sm mb-4">WHY リッチ＆ビルド</p>
+                        <h2 className="text-3xl md:text-4xl font-bold text-[#064E3B]">リッチ＆ビルドが選ばれる理由</h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         {[
                             {
-                                icon: Zap,
-                                title: '未経験OK',
-                                text: '経験やスキルは不問。やる気と継続力があれば、ゼロからプロフェッショナルを目指せます。'
-                            },
-                            {
-                                icon: Users,
-                                title: '仲間と成長',
-                                text: '同じ志を持った仲間と切磋琢磨。一人じゃないから、困難も乗り越えられる。'
-                            },
-                            {
-                                icon: TrendingUp,
-                                title: 'キャリアアップ',
-                                text: '資格取得支援制度完備。着実にスキルアップして、市場価値の高い人材に成長できます。'
+                                icon: GraduationCap,
+                                title: '充実の研修制度',
+                                desc: '入社後のビジネスマナー研修から、専門知識を学ぶ技術研修まで。未経験からでも安心してスタートできるカリキュラムを用意しています。'
                             },
                             {
                                 icon: Heart,
                                 title: '手厚いサポート',
-                                text: '現場での悩みや不安にも寄り添う、アットホームなサポート体制。安心して働けます。'
+                                desc: '専任のキャリアアドバイザーが、あなたの仕事の悩みや将来の不安に寄り添います。定期的な面談で、安心して働ける環境を整えます。'
                             },
+                            {
+                                icon: Briefcase,
+                                title: '豊富なキャリアパス',
+                                desc: '施工管理としてのスキルアップはもちろん、国家資格の取得支援や、将来的には大手ゼネコンへの転籍など、多様なキャリアを描けます。'
+                            }
                         ].map((item, index) => (
-                            <div key={index} className="bg-[#F0FDF4] p-8 rounded-xl hover:shadow-lg transition-shadow">
-                                <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white mb-6">
-                                    <item.icon className="w-6 h-6" />
+                            <div key={index} className="bg-[#F0FDF4] p-10 rounded-2xl border border-emerald-100 hover:shadow-xl transition-all duration-300 group text-center">
+                                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-emerald-400 mx-auto mb-6 group-hover:bg-[#10B981] group-hover:text-white transition-all duration-300 shadow-sm">
+                                    <item.icon className="w-8 h-8" />
                                 </div>
                                 <h3 className="text-xl font-bold mb-4 text-[#064E3B]">{item.title}</h3>
-                                <p className="text-emerald-800/70 leading-relaxed">{item.text}</p>
+                                <p className="text-[#064E3B]/70 leading-relaxed text-sm">
+                                    {item.desc}
+                                </p>
                             </div>
                         ))}
                     </div>
@@ -111,27 +121,25 @@ export default function RecruitPage() {
             <section className="py-24 bg-[#F0FDF4]">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16">
-                        <p className="text-emerald-500 font-bold tracking-widest text-sm mb-4">JOB TYPE</p>
+                        <p className="text-[#10B981] font-bold tracking-widest text-sm mb-4">JOB TYPE</p>
                         <h2 className="text-3xl md:text-4xl font-bold text-[#064E3B]">募集職種</h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                        {[
-                            { title: '施工管理（建築）', desc: 'ビルやマンション、商業施設などの建築現場における施工管理業務。工程・品質・安全の管理を担当。' },
-                            { title: '施工管理（土木）', desc: '道路、橋梁、トンネルなどのインフラ工事における施工管理業務。社会基盤を支える仕事です。' },
-                            { title: '施工管理（設備）', desc: '空調・衛生設備の工事における施工管理業務。快適な空間づくりに貢献します。' },
-                            { title: '施工管理（電気）', desc: '電気設備工事における施工管理業務。現代社会に不可欠なインフラを支えます。' },
-                            { title: '営業', desc: 'ゼネコンやサブコンへの提案営業、技術者のマッチング、フォローアップを担当します。' },
-                            { title: '採用・人事', desc: '新卒・中途採用の企画・運営、社員研修の企画など、人材に関わる業務全般を担当。' }
-                        ].map((job, index) => (
-                            <div key={index} className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                                <h3 className="text-xl font-bold mb-4 text-[#064E3B]">{job.title}</h3>
-                                <p className="text-emerald-800/70 text-sm leading-relaxed mb-6">{job.desc}</p>
-                                <div className="text-emerald-500 font-bold text-sm flex items-center gap-2 hover:text-emerald-600 transition-colors cursor-pointer">
-                                    詳細を見る <ArrowRight className="w-4 h-4" />
-                                </div>
-                            </div>
-                        ))}
+                    <div className="max-w-2xl mx-auto text-center">
+                        <div className="bg-white p-12 rounded-2xl shadow-sm border border-emerald-100">
+                            <h3 className="text-2xl font-bold text-[#064E3B] mb-4">施工管理スタッフ</h3>
+                            <p className="text-[#064E3B]/70 mb-8 leading-relaxed">
+                                募集条件や給与などの詳細については、<br />
+                                お気軽にお問い合わせください。
+                            </p>
+                            <Link
+                                href="/contact"
+                                className="inline-flex items-center gap-2 bg-[#10B981] text-white px-8 py-4 rounded-full font-bold hover:bg-[#059669] transition-colors"
+                            >
+                                お問い合わせはこちら
+                                <ArrowRight className="w-5 h-5" />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -140,52 +148,55 @@ export default function RecruitPage() {
             <section className="py-24 bg-white">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16">
-                        <p className="text-emerald-500 font-bold tracking-widest text-sm mb-4">REQUIREMENTS</p>
+                        <p className="text-[#10B981] font-bold tracking-widest text-sm mb-4">REQUIREMENTS</p>
                         <h2 className="text-3xl md:text-4xl font-bold text-[#064E3B]">募集要項</h2>
                     </div>
 
-                    <div className="max-w-3xl mx-auto">
-                        <div className="bg-[#F0FDF4] rounded-2xl overflow-hidden">
-                            <table className="w-full">
-                                <tbody className="divide-y divide-emerald-100">
-                                    {[
-                                        { label: '雇用形態', value: '正社員' },
-                                        { label: '応募資格', value: '学歴不問・未経験歓迎\n普通自動車免許（あれば尚可）' },
-                                        { label: '勤務地', value: '首都圏の各プロジェクト先' },
-                                        { label: '勤務時間', value: '8:00〜17:00（現場による）' },
-                                        { label: '給与', value: '月給 25万円〜\n※経験・能力を考慮の上、決定' },
-                                        { label: '待遇・福利厚生', value: '社会保険完備、交通費支給、資格取得支援制度、研修制度あり' },
-                                        { label: '休日・休暇', value: '週休2日制（土日祝）、GW、夏季休暇、年末年始休暇' },
-                                    ].map((row, index) => (
-                                        <tr key={index}>
-                                            <th className="px-8 py-6 text-left font-bold text-[#064E3B] w-1/3 bg-emerald-50 align-top">{row.label}</th>
-                                            <td className="px-8 py-6 text-emerald-800/80 whitespace-pre-line">{row.value}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                    <div className="max-w-3xl mx-auto bg-white rounded-2xl border border-emerald-100 overflow-hidden">
+                        <table className="w-full">
+                            <tbody className="divide-y divide-emerald-50">
+                                {[
+                                    { label: '雇用形態', value: '正社員（試用期間あり）' },
+                                    { label: '勤務地', value: '東京、神奈川、千葉、埼玉の各プロジェクト先\n※転居を伴う転勤なし' },
+                                    { label: '勤務時間', value: '8:00〜17:00（実働8時間）\n※プロジェクトにより異なる場合があります' },
+                                    { label: '休日・休暇', value: '週休2日制（土日祝）、GW、夏季休暇、年末年始休暇、有給休暇、慶弔休暇' },
+                                    { label: '福利厚生', value: '社会保険完備、交通費全額支給、資格取得支援制度、制服貸与、定期健康診断' },
+                                ].map((row, index) => (
+                                    <tr key={index} className="hover:bg-emerald-50/50 transition-colors">
+                                        <th className="px-8 py-6 text-left font-bold text-[#064E3B] w-1/3 bg-emerald-50/50 whitespace-pre-line align-top">{row.label}</th>
+                                        <td className="px-8 py-6 text-[#064E3B]/70 whitespace-pre-line">{row.value}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
 
             {/* Entry CTA */}
-            <section className="py-32 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white text-center relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute inset-0 bg-[url('/images/pattern.png')] bg-repeat" />
-                </div>
-                <div className="container mx-auto px-6 relative z-10">
-                    <p className="font-bold tracking-widest text-emerald-100 mb-4">ENTRY</p>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-8">一緒に、未来を創ろう。</h2>
-                    <p className="text-lg mb-12 text-emerald-50 max-w-2xl mx-auto leading-relaxed">
-                        経験は問いません。大切なのは「やり続ける力」。<br />
-                        私たちと一緒に、建設業界の新しいスタンダードを創りませんか？
+            <section className="py-32 bg-[#064E3B] relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2089&auto=format&fit=crop')] bg-cover bg-center" />
+                <div className="container mx-auto px-6 relative z-10 text-center">
+                    <p className="text-emerald-400 font-bold tracking-widest text-sm mb-6">ENTRY</p>
+                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-12 leading-tight">
+                        まずは、話を聞いてみませんか？
+                    </h2>
+                    <p className="text-emerald-100 text-lg mb-12 max-w-2xl mx-auto">
+                        履歴書は不要です。私服でリラックスしてお越しください。<br />
+                        あなたの不安や疑問に、包み隠さずお答えします。
                     </p>
-                    <Link href="/contact">
-                        <Button className="bg-white text-emerald-600 hover:bg-emerald-50 px-16 py-8 rounded-full text-xl font-bold tracking-widest">
-                            エントリーはこちら
-                        </Button>
-                    </Link>
+                    <div className="flex flex-col md:flex-row gap-6 justify-center">
+                        <Link href="/contact" className="inline-block">
+                            <Button size="lg" className="bg-white text-[#064E3B] hover:bg-emerald-50 min-w-[240px] h-16 text-lg">
+                                エントリーする
+                            </Button>
+                        </Link>
+                        <Link href="/contact" className="inline-block">
+                            <Button variant="outline" size="lg" className="border-emerald-400 text-emerald-100 hover:bg-emerald-900/50 hover:text-white min-w-[240px] h-16 text-lg">
+                                カジュアル面談を申し込む
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
             </section>
         </main>

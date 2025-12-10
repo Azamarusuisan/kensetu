@@ -1,57 +1,63 @@
-import { HeroSection } from '@/components/HeroSection';
+import Link from 'next/link';
 import { LogoGrid } from '@/components/LogoGrid';
 import { NewsList } from '@/components/NewsList';
-import { Button } from '@/components/ui/Button';
-import Link from 'next/link';
-import { ArrowRight, Users, TrendingUp, Shield } from 'lucide-react';
+import { HeroSection } from '@/components/HeroSection';
 
 export default function Home() {
   return (
     <>
+      {/* Hero Section */}
       <HeroSection />
 
+
+
       {/* Concept Section */}
-      <section id="concept" className="py-32 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center gap-16">
-            {/* Left: Text Content */}
-            <div className="w-full md:w-1/2">
-              <div className="mb-8">
-                <p className="text-emerald-500 font-bold tracking-widest text-sm mb-2">CONCEPT</p>
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-2 text-[#064E3B]">私たちの想い</h2>
+      <section className="relative min-h-dvh flex flex-col justify-center py-12 md:py-24 lg:py-32 bg-[#F0FFF4] overflow-hidden">
+        {/* Diagonal Background Accent */}
+        <div className="absolute top-0 right-0 w-3/4 h-full bg-[#E6FFFA] -skew-x-12 translate-x-1/4 -z-10" />
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-24 items-center">
+            {/* Left: Text */}
+            <div className="w-full md:w-1/2 relative flex flex-col items-center md:items-start text-center md:text-left">
+              <div className="absolute -left-20 -top-20 text-[200px] font-black text-[#009900] opacity-[0.05] select-none pointer-events-none hidden md:block">
+                01
               </div>
-
-              <h3 className="text-2xl md:text-3xl font-bold mb-8 leading-relaxed text-[#064E3B]">
-                施工管理の未来を、<br />
-                一緒に創りませんか。
+              <h2 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter mb-6 leading-[0.9] text-[#004d00]">
+                CONCEPT
+              </h2>
+              <p className="text-sm md:text-base font-bold tracking-widest text-[#009900] mb-8 md:mb-12">
+                株式会社リッチ＆ビルドについて
+              </p>
+              <h3 className="text-2xl md:text-4xl font-bold mb-6 md:mb-8 leading-tight text-[#004d00]">
+                建設業界の<br />リーダーをつくる。
               </h3>
-
-              <p className="text-emerald-800/70 leading-loose mb-8">
-                株式会社リッチ＆ビルドは、施工管理の人材派遣を通じて建設業界に新しい風を吹き込みます。
-                経験やスキルがなくても、「やり続ける力」があれば必ず成長できる。
-                私たちはそう信じています。
+              <p className="text-[#004d00]/80 leading-loose mb-6 font-medium text-sm md:text-base">
+                "ゼロからの挑戦"<br />
+                設備・電気のスペシャリストとして成長し、
               </p>
-              <p className="text-emerald-800/70 leading-loose mb-12">
-                若い力と情熱で、日本の建設現場をもっと元気に、もっと魅力的に。
-                共に成長し、共に挑戦する仲間を待っています。
+              <p className="text-[#004d00]/80 leading-loose mb-8 md:mb-12 font-medium text-sm md:text-base">
+                あなたの力で業界の未来を切り拓く<br />
+                リーダーになりませんか？
               </p>
-
-              <Link href="/company">
-                <Button variant="outline" className="rounded-full px-10 py-6 text-sm tracking-widest border-emerald-500 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-colors">
-                  VIEW MORE
-                </Button>
+              <Link
+                href="/company"
+                className="group inline-flex items-center gap-2 text-sm font-bold tracking-widest border-b-2 border-[#009900] pb-1 text-[#009900] hover:opacity-60 transition-opacity"
+              >
+                VIEW MORE
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
               </Link>
             </div>
 
             {/* Right: Image */}
             <div className="w-full md:w-1/2">
-              <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-xl">
+              <div className="relative aspect-[4/3] md:aspect-[4/3] max-h-[40dvh] md:max-h-none w-full">
+                <div className="absolute inset-0 bg-[#009900]/10 translate-x-4 translate-y-4" />
                 <img
-                  src="/images/concept-team.png"
-                  alt="チームワーク"
-                  className="object-cover w-full h-full"
+                  src="/images/concept-workers.png"
+                  alt="コンセプト"
+                  className="relative w-full h-full object-cover transition-all duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/30 to-transparent" />
               </div>
             </div>
           </div>
@@ -59,205 +65,150 @@ export default function Home() {
       </section>
 
       {/* Business Section */}
-      <section id="business" className="py-32 bg-[#F0FDF4]">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-emerald-500 font-bold tracking-widest text-sm mb-2">BUSINESS</p>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#064E3B]">事業内容</h2>
-          </div>
+      <section className="relative min-h-dvh flex flex-col justify-center py-12 md:py-24 lg:py-32 bg-[#009900] text-white overflow-hidden">
+        {/* Diagonal Split Background */}
+        <div className="absolute inset-0 bg-[#008000]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[#009900] [clip-path:polygon(0_0,60%_0,40%_100%,0%_100%)]" />
 
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-3xl p-8 md:p-12 shadow-lg">
-              <div className="flex flex-col md:flex-row gap-12 items-center">
-                <div className="w-full md:w-1/2">
-                  <div className="aspect-square relative rounded-2xl overflow-hidden bg-emerald-100">
-                    <img
-                      src="/images/business-construction.png"
-                      alt="施工管理"
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                </div>
-                <div className="w-full md:w-1/2">
-                  <h3 className="text-2xl font-bold mb-6 text-[#064E3B]">施工管理人材派遣</h3>
-                  <p className="text-emerald-800/70 leading-loose mb-8">
-                    建築・土木・設備・電気など、あらゆる建設現場において即戦力となる施工管理技術者を派遣します。
-                    未経験者の育成から、経験豊富なベテランまで、現場のニーズに合わせた最適な人材をマッチングします。
+        <div className="relative max-w-7xl mx-auto px-6 md:px-12 w-full">
+          <div className="flex flex-col md:flex-row-reverse items-center md:items-stretch gap-8 md:gap-16">
+            {/* Text Side (Right on Desktop) */}
+            <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left">
+              <div className="absolute -right-20 -top-10 text-[200px] font-black text-white opacity-[0.1] select-none pointer-events-none hidden md:block">
+                02
+              </div>
+              <h2 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter mb-6 leading-[0.9]">
+                BUSINESS
+              </h2>
+              <p className="text-sm md:text-base font-bold tracking-widest text-[#FFF] mb-6 md:mb-16 opacity-80">
+                事業内容
+              </p>
+
+              <div className="space-y-8 md:space-y-12 w-full">
+                <div className="flex flex-col items-center md:items-start">
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 flex items-center gap-4 justify-center md:justify-start">
+                    <span className="w-8 md:w-12 h-[1px] bg-white/50 hidden md:block"></span>
+                    施工管理の人材派遣
+                  </h3>
+                  <p className="text-white/90 leading-loose pl-0 md:pl-16 text-sm md:text-base">
+                    株式会社リッチ＆ビルドは、施工管理の人材派遣を行っています。若い力と情熱で日本の建設業界を支え、施工管理のプロフェッショナル集団を目指しております。
                   </p>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                        <Users className="w-5 h-5 text-emerald-600" />
-                      </div>
-                      <span className="font-medium text-[#064E3B]">若手人材の積極採用・育成</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                        <TrendingUp className="w-5 h-5 text-emerald-600" />
-                      </div>
-                      <span className="font-medium text-[#064E3B]">キャリアアップ支援制度</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                        <Shield className="w-5 h-5 text-emerald-600" />
-                      </div>
-                      <span className="font-medium text-[#064E3B]">安心のサポート体制</span>
-                    </div>
-                  </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div className="text-center mt-12">
-            <Link href="/service">
-              <Button variant="outline" className="rounded-full px-10 py-6 text-sm tracking-widest border-emerald-500 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-colors">
-                VIEW MORE
-              </Button>
-            </Link>
+              <div className="mt-8 md:mt-16 pl-0 md:pl-16 flex justify-center md:justify-start">
+                <Link
+                  href="/service"
+                  className="group inline-flex items-center gap-2 text-sm font-bold tracking-widest border-b-2 border-white pb-1 hover:opacity-60 transition-opacity"
+                >
+                  VIEW MORE
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Image Side (Left on Desktop) */}
+            <div className="w-full md:w-1/2">
+              <div className="relative h-[30vh] md:h-full min-h-[300px] md:min-h-[500px]">
+                <img
+                  src="/images/business-building.png"
+                  alt="ビジネス"
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Client Section */}
-      <section id="client" className="py-32 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <p className="text-emerald-500 font-bold tracking-widest text-sm mb-2">CLIENT</p>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-[#064E3B]">取引実績</h2>
-            <p className="text-emerald-800/70">
-              大手ゼネコン・サブコンを含む多数の企業様との取引実績があります
-            </p>
+      <section className="min-h-dvh flex flex-col justify-center py-6 md:py-24 lg:py-32 bg-[#F0FFF4] relative">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full">
+          <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-8 md:mb-20 gap-6 md:gap-8">
+            <div className="text-center md:text-left">
+              <h2 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter mb-2 md:mb-4 leading-[0.9] text-[#009900]">
+                CLIENT
+              </h2>
+              <p className="text-sm md:text-base font-bold tracking-widest text-[#009900]">
+                取引実績
+              </p>
+            </div>
+            <div className="w-full md:w-auto flex justify-center md:justify-end">
+              <Link
+                href="/client"
+                className="group inline-flex items-center gap-2 text-sm font-bold tracking-widest border-b-2 border-[#009900] pb-1 text-[#009900] hover:opacity-60 transition-opacity"
+              >
+                VIEW MORE
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
           </div>
 
           <LogoGrid logos={[
-            { src: '', alt: 'Client 1' },
-            { src: '', alt: 'Client 2' },
-            { src: '', alt: 'Client 3' },
-            { src: '', alt: 'Client 4' },
-            { src: '', alt: 'Client 5' },
-            { src: '', alt: 'Client 6' },
-            { src: '', alt: 'Client 7' },
-            { src: '', alt: 'Client 8' },
+            { src: '', alt: '住友電設株式会社' },
+            { src: '', alt: '株式会社日比谷アメニス' },
+            { src: '', alt: '株式会社関電工' },
+            { src: '', alt: '東急建設株式会社' },
+            { src: '', alt: '大成建設株式会社' },
+            { src: '', alt: '鹿島建設株式会社' },
+            { src: '', alt: '清水建設株式会社' },
+            { src: '', alt: '株式会社大林組' },
+            { src: '', alt: '株式会社竹中工務店' },
+            { src: '', alt: '戸田建設株式会社' },
           ]} />
-
-          <div className="text-center mt-12">
-            <Link href="/client">
-              <Button variant="outline" className="rounded-full px-10 py-6 text-sm tracking-widest border-emerald-500 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-colors">
-                VIEW MORE
-              </Button>
-            </Link>
-          </div>
         </div>
       </section>
 
       {/* News Section */}
-      <section id="news" className="py-32 bg-[#F0FDF4]">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
-            <div>
-              <p className="text-emerald-500 font-bold tracking-widest text-sm mb-2">NEWS</p>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#064E3B]">お知らせ</h2>
+      <section className="min-h-dvh flex flex-col justify-center py-6 md:py-24 lg:py-32 bg-[#E6FFFA] relative overflow-hidden">
+        {/* Decorative Line */}
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-[#009900]/10" />
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full">
+          <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-8 md:mb-20 gap-6 md:gap-8">
+            <div className="text-center md:text-left">
+              <h2 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter mb-2 md:mb-4 leading-[0.9] text-[#009900]">
+                NEWS
+              </h2>
+              <p className="text-sm md:text-base font-bold tracking-widest text-[#009900]">
+                お知らせ
+              </p>
             </div>
-            <Link href="/news" className="mt-4 md:mt-0">
-              <Button variant="outline" className="rounded-full px-8 py-4 text-sm tracking-widest border-emerald-500 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-colors">
-                VIEW ALL <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
+            <div className="w-full md:w-auto flex justify-center md:justify-end">
+              <Link
+                href="/news"
+                className="group inline-flex items-center gap-2 text-sm font-bold tracking-widest border-b-2 border-[#009900] pb-1 text-[#009900] hover:opacity-60 transition-opacity"
+              >
+                VIEW ALL
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
           </div>
           <NewsList />
         </div>
       </section>
 
-      {/* Member Section */}
-      <section id="member" className="py-32 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-emerald-500 font-bold tracking-widest text-sm mb-2">MEMBER</p>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#064E3B]">経営陣</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* CEO */}
-            <div className="bg-[#F0FDF4] rounded-2xl p-8 hover:shadow-lg transition-shadow">
-              <div className="aspect-[3/4] bg-emerald-200 rounded-xl mb-6 overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center text-emerald-400 font-bold">
-                  PHOTO
-                </div>
-              </div>
-              <p className="text-emerald-500 text-sm font-bold tracking-wider mb-2">CEO</p>
-              <h3 className="text-2xl font-bold text-[#064E3B] mb-2">荒井 武志</h3>
-              <p className="text-sm text-emerald-600 mb-4">代表取締役</p>
-              <p className="text-emerald-800/70 text-sm leading-relaxed">
-                「継続は力なり」をモットーに、スキルや経験がなくても誰よりもやり続けることで道を切り拓いてきた。
-                仲間と一緒に大きな成長を目指す会社を創る。
-              </p>
-            </div>
-
-            {/* Director */}
-            <div className="bg-[#F0FDF4] rounded-2xl p-8 hover:shadow-lg transition-shadow">
-              <div className="aspect-[3/4] bg-emerald-200 rounded-xl mb-6 overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center text-emerald-400 font-bold">
-                  PHOTO
-                </div>
-              </div>
-              <p className="text-emerald-500 text-sm font-bold tracking-wider mb-2">DIRECTOR</p>
-              <h3 className="text-2xl font-bold text-[#064E3B] mb-2">鵜山 康宏</h3>
-              <p className="text-sm text-emerald-600 mb-4">取締役</p>
-              <p className="text-emerald-800/70 text-sm leading-relaxed">
-                職人の家系に生まれ、営業の世界で叩き上げ。2年間休み0日で営業トップに。
-                23歳で起業し、現在は複数の会社を経営する実業家。
-              </p>
-            </div>
-          </div>
-
-          <div className="text-center mt-12">
-            <Link href="/company">
-              <Button variant="outline" className="rounded-full px-10 py-6 text-sm tracking-widest border-emerald-500 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-colors">
-                VIEW MORE
-              </Button>
-            </Link>
-          </div>
+      {/* Contact Section */}
+      <section className="relative flex flex-col justify-center py-16 md:py-24 lg:py-32 bg-[#059669] overflow-hidden">
+        {/* Background Overlay with diagonal cut */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[url('/images/contact-bg-mobile.png')] md:bg-[url('/images/contact-bg.png')] bg-cover bg-center" />
+          <div className="absolute inset-0 bg-black/50" />
         </div>
-      </section>
 
-      {/* Recruit CTA Section */}
-      <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-emerald-500" />
-        <div className="absolute inset-0 opacity-20">
-          <img
-            src="/images/recruit-bg.png"
-            alt=""
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="container mx-auto px-6 relative z-10 text-white text-center">
-          <p className="font-bold tracking-widest text-emerald-100 mb-4">JOIN US</p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">一緒に、未来を創ろう。</h2>
-          <p className="text-lg mb-12 text-emerald-50 max-w-2xl mx-auto leading-relaxed">
-            経験は問いません。大切なのは「やり続ける力」。<br />
-            私たちと一緒に、建設業界の新しいスタンダードを創りませんか？
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 text-center w-full">
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-white mb-4 md:mb-6 leading-[0.9]">
+            CONTACT
+          </h2>
+          <p className="text-sm md:text-base font-bold tracking-widest text-white/70 mb-6 md:mb-16">
+            お問い合わせ
           </p>
-          <Link href="/recruit">
-            <Button className="bg-white text-emerald-600 hover:bg-emerald-50 px-12 py-8 rounded-full text-lg font-bold tracking-wider">
-              採用情報を見る <ArrowRight className="w-5 h-5 ml-2 inline" />
-            </Button>
-          </Link>
-        </div>
-      </section>
 
-      {/* Contact CTA Section */}
-      <section className="py-24 bg-[#064E3B]">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-emerald-400 font-bold tracking-widest mb-4">CONTACT</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">お問い合わせ</h2>
-          <p className="text-emerald-100/80 mb-12 max-w-xl mx-auto">
-            人材に関するご相談、お見積もりなど、お気軽にお問い合わせください。
-          </p>
-          <Link href="/contact">
-            <Button className="bg-emerald-500 hover:bg-emerald-400 text-white px-12 py-6 rounded-full text-base font-bold tracking-wider">
-              お問い合わせはこちら
-            </Button>
+          <Link
+            href="/contact"
+            className="inline-block bg-white text-[#006600] text-lg md:text-xl font-bold tracking-widest px-12 md:px-16 py-4 md:py-6 hover:bg-[#E6FFFA] border-2 border-white transition-all duration-300 shadow-xl"
+          >
+            お問い合わせをはじめる
           </Link>
         </div>
       </section>

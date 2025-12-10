@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/Button';
-import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Navbar = () => {
@@ -12,11 +10,12 @@ export const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const navItems = [
-        { name: 'COMPANY', href: '/company' },
-        { name: 'SERVICE', href: '/service' },
-        { name: 'CLIENT', href: '/client' },
-        { name: 'NEWS', href: '/news' },
-        { name: 'CONTACT', href: '/contact' },
+        { name: '会社案内', href: '/company' },
+        { name: '事業内容', href: '/service' },
+        { name: '企業の皆様へ', href: '/client' },
+        { name: 'お知らせ', href: '/news' },
+        { name: '採用情報', href: '/recruit' },
+        { name: 'お問い合わせ', href: '/contact' },
     ];
 
     useEffect(() => {
@@ -27,108 +26,103 @@ export const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Determine header style state
-    const isDarkText = isScrolled || isMobileMenuOpen;
-    const headerBg = isScrolled || isMobileMenuOpen ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent';
-
     return (
         <>
             <header
                 className={cn(
-                    'fixed top-0 left-0 w-full z-50 transition-all duration-500',
-                    isScrolled || isMobileMenuOpen ? 'bg-white/95 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'
+                    'fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white',
+                    isScrolled || isMobileMenuOpen
+                        ? 'shadow-sm py-8'
+                        : 'py-10'
                 )}
             >
-                <div className="container mx-auto px-6 flex items-center justify-between">
+                <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+                    {/* Logo */}
                     <Link
                         href="/"
-                        className={cn(
-                            "text-2xl font-bold tracking-tighter transition-colors z-50 relative font-sans flex items-center gap-2",
-                            (isScrolled || isMobileMenuOpen) ? "text-[#064E3B]" : "text-[#064E3B]"
-                        )}
+                        className="z-50 relative"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
-                        <div className="leading-none">
-                            <span className="block text-xs tracking-[0.2em] text-emerald-500">RICH & BUILD</span>
-                            <span className="block text-lg">リッチ＆ビルド</span>
+                        <div className="font-bold">
+                            <span className="text-3xl tracking-tight text-[#111]">リッチ＆ビルド</span>
                         </div>
                     </Link>
 
                     {/* Desktop Nav */}
-                    <nav className="hidden md:flex items-center gap-8">
+                    <nav className="hidden md:flex items-center gap-12">
                         {navItems.map((item) => (
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className={cn(
-                                    "text-sm font-bold tracking-widest hover:text-emerald-500 transition-colors relative group",
-                                    (isScrolled) ? "text-[#064E3B]" : "text-[#064E3B]"
-                                )}
+                                className="text-lg font-bold text-[#333] hover:text-[#10B981] transition-colors"
                             >
                                 {item.name}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 transition-all group-hover:w-full" />
                             </Link>
                         ))}
-                        <Link href="/recruit">
-                            <Button
-                                variant="outline"
-                                className={cn(
-                                    "rounded-full px-8 border-emerald-500 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-colors",
-                                    (isScrolled) ? "border-emerald-500 text-emerald-600" : "border-emerald-500 text-emerald-600"
-                                )}
-                            >
-                                RECRUIT
-                            </Button>
-                        </Link>
                     </nav>
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden z-50 relative w-10 h-10 flex flex-col justify-center items-center gap-1.5"
+                        className="md:hidden z-50 relative w-8 h-8 flex flex-col justify-center items-center"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        aria-label="メニュー"
                     >
-                        <motion.span
-                            animate={isMobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-                            className={cn("w-6 h-0.5 block transition-colors", isMobileMenuOpen ? "bg-[#064E3B]" : "bg-[#064E3B]")}
-                        />
-                        <motion.span
-                            animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                            className={cn("w-6 h-0.5 block transition-colors", isMobileMenuOpen ? "bg-[#064E3B]" : "bg-[#064E3B]")}
-                        />
-                        <motion.span
-                            animate={isMobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-                            className={cn("w-6 h-0.5 block transition-colors", isMobileMenuOpen ? "bg-[#064E3B]" : "bg-[#064E3B]")}
-                        />
+                        <span className={cn(
+                            "w-6 h-[2px] bg-[#111] transition-all duration-300 absolute",
+                            isMobileMenuOpen ? "rotate-45" : "-translate-y-2"
+                        )} />
+                        <span className={cn(
+                            "w-6 h-[2px] bg-[#111] transition-all duration-300",
+                            isMobileMenuOpen ? "opacity-0" : "opacity-100"
+                        )} />
+                        <span className={cn(
+                            "w-6 h-[2px] bg-[#111] transition-all duration-300 absolute",
+                            isMobileMenuOpen ? "-rotate-45" : "translate-y-2"
+                        )} />
                     </button>
                 </div>
             </header>
 
-            {/* Mobile Menu Overlay */}
+            {/* Mobile Menu */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-0 z-40 bg-white pt-24 px-6 md:hidden"
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        className="fixed inset-0 z-40 bg-white/95 backdrop-blur-md pt-28 px-6 md:hidden flex flex-col items-center justify-start space-y-6"
                     >
-                        <nav className="flex flex-col gap-6">
-                            {navItems.map((item) => (
-                                <Link
+                        <nav className="flex flex-col gap-6 w-full text-center">
+                            {navItems.map((item, index) => (
+                                <motion.div
                                     key={item.name}
-                                    href={item.href}
-                                    className="text-2xl font-bold text-[#064E3B] tracking-widest"
-                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: index * 0.05 + 0.1 }}
                                 >
-                                    {item.name}
-                                </Link>
+                                    <Link
+                                        href={item.href}
+                                        className="text-xl font-bold text-[#111] py-3 block hover:text-[#10B981] transition-colors"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                </motion.div>
                             ))}
-                            <Link href="/recruit" onClick={() => setIsMobileMenuOpen(false)}>
-                                <Button variant="outline" className="w-full rounded-full border-emerald-500 text-emerald-600 text-lg py-6 mt-4">
-                                    RECRUIT
-                                </Button>
-                            </Link>
                         </nav>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.5 }}
+                            className="mt-8"
+                        >
+                            <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                                <span className="inline-block bg-[#10B981] text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-[#059669] transition-all">
+                                    お問い合わせ
+                                </span>
+                            </Link>
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>

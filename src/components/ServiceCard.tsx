@@ -16,12 +16,12 @@ export const ServiceCard = ({ title, description, icon, href, index }: ServiceCa
                 <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6 transition-colors group-hover:bg-primary group-hover:text-white">
                     {icon || <div className="w-6 h-6 bg-current rounded-full" />}
                 </div>
-                <h3 className="text-xl font-bold text-text-primary mb-4 font-sans">{title}</h3>
-                <p className="text-text-secondary text-sm leading-relaxed mb-6 flex-grow">
+                <h3 className="text-2xl font-black text-text-primary mb-4 font-sans tracking-tight">{title}</h3>
+                <p className="text-text-secondary text-base font-medium leading-relaxed mb-6 flex-grow">
                     {description}
                 </p>
-                <div className="flex items-center text-primary font-bold text-sm group-hover:underline tracking-wide">
-                    LEARN MORE <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                <div className="flex items-center text-primary font-black text-base group-hover:underline tracking-wide">
+                    LEARN MORE <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                 </div>
             </div>
         </Link>

@@ -8,16 +8,43 @@
   --color-background: #F0FDF4;
   --color-surface: #FFFFFF;
   --color-text-primary: #064E3B;
-  --color-text-secondary: #047857;
-  --color-border: #D1FAE5;
+  --color-text-secondary: #555555;
+  --color-border: #e0e0e0;
+  --color-muted: #f5f5f5;
 
-  --font-sans: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
+  --font-sans: var(--font-noto-sans-jp), "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  --font-display: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
+    background-color: #ffffff;
+    color: #111111;
     font-family: var(--font-sans);
+    font-feature-settings: "palt";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.8;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    color: #111111;
+  }
+
+  p {
+    line-height: 2;
+    color: #333333;
   }
 }

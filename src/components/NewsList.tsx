@@ -5,7 +5,6 @@ interface NewsItem {
     date: string;
     category: string;
     title: string;
-    image?: string;
 }
 
 const defaultNewsItems: NewsItem[] = [
@@ -14,14 +13,12 @@ const defaultNewsItems: NewsItem[] = [
         date: '2025.01.15',
         category: 'お知らせ',
         title: 'ホームページを公開しました',
-        image: '/images/news-default.png',
     },
     {
         id: '2',
         date: '2025.01.10',
         category: '採用',
         title: '2025年度の採用を開始しました',
-        image: '/images/news-default.png',
     },
 ];
 
@@ -33,32 +30,20 @@ export const NewsList = ({ items }: NewsListProps) => {
     const newsItems = items || defaultNewsItems;
 
     return (
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="divide-y divide-black/10 border-t border-b border-black/10">
             {newsItems.map((item) => (
                 <Link key={item.id} href={`/news/${item.id}`} className="group block">
-                    {item.image && (
-                        <div className="aspect-video bg-emerald-50 mb-6 overflow-hidden relative rounded-xl">
-                            <img
-                                src={item.image}
-                                alt={item.title}
-                                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
-                            />
+                    <div className="flex flex-col md:flex-row md:items-center gap-4 py-4 md:py-8 border-b border-gray-100 hover:bg-gray-50 transition-colors px-4 -mx-4 rounded-xl">
+                        <div className="flex items-center gap-4 shrink-0">
+                            <span className="text-gray-500 font-bold text-base font-mono">{item.date}</span>
+                            <span className="px-3 py-1 bg-[#F0FDF4] text-[#10B981] text-sm font-bold rounded border border-[#10B981]/20">
+                                {item.category}
+                            </span>
                         </div>
-                    )}
-                    {!item.image && (
-                        <div className="aspect-video bg-emerald-50 mb-6 overflow-hidden relative rounded-xl flex items-center justify-center">
-                            <span className="text-emerald-300 font-bold tracking-widest">NEWS</span>
-                        </div>
-                    )}
-                    <div className="flex items-center gap-4 mb-3">
-                        <span className="bg-emerald-500 text-white text-xs font-bold px-4 py-1.5 rounded-full">
-                            {item.category}
-                        </span>
+                        <h3 className="text-lg font-bold text-[#064E3B] group-hover:text-[#10B981] transition-colors line-clamp-1">
+                            {item.title}
+                        </h3>
                     </div>
-                    <p className="text-emerald-600/70 text-sm mb-2 font-medium">{item.date}</p>
-                    <h3 className="text-lg font-bold leading-relaxed text-[#064E3B] group-hover:text-emerald-600 transition-colors">
-                        {item.title}
-                    </h3>
                 </Link>
             ))}
         </div>

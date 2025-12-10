@@ -23,7 +23,11 @@ export default function NewsPage() {
 
     return (
         <main>
-            <SubpageHero titleEn="NEWS" titleJa="お知らせ" />
+            <SubpageHero
+                titleEn="NEWS"
+                titleJa="お知らせ"
+                backgroundImage="/images/news-keyboard.png"
+            />
 
             <div className="container mx-auto px-6 py-24">
                 <div className="max-w-4xl mx-auto">
@@ -34,10 +38,10 @@ export default function NewsPage() {
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
                                 className={cn(
-                                    "px-6 py-2 rounded-full text-sm font-bold tracking-wider transition-all duration-300 border",
+                                    "px-6 py-3 rounded-full text-base font-bold tracking-wider transition-all duration-300 border",
                                     activeCategory === cat
-                                        ? "bg-emerald-500 text-white border-emerald-500"
-                                        : "bg-white text-emerald-600 border-emerald-200 hover:border-emerald-500"
+                                        ? "bg-[#10B981] text-white border-[#10B981]"
+                                        : "bg-white text-[#059669] border-[#10B981] hover:border-[#10B981]"
                                 )}
                             >
                                 {cat}
@@ -50,7 +54,7 @@ export default function NewsPage() {
                         {filteredNews.length > 0 ? (
                             <NewsList items={filteredNews} />
                         ) : (
-                            <div className="text-center py-16 text-emerald-600/60">
+                            <div className="text-center py-16 text-[#059669]/60">
                                 該当するニュースがありません
                             </div>
                         )}
@@ -59,7 +63,7 @@ export default function NewsPage() {
                     {/* Pagination (Static for now) */}
                     {filteredNews.length > 0 && (
                         <div className="mt-16 flex justify-center gap-2">
-                            <button className="w-10 h-10 flex items-center justify-center rounded-full bg-emerald-500 text-white font-bold">1</button>
+                            <button className="w-10 h-10 flex items-center justify-center rounded-full bg-[#10B981] text-white font-bold">1</button>
                         </div>
                     )}
                 </div>

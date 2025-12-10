@@ -1,19 +1,23 @@
 interface SubpageHeroProps {
     titleEn: string;
     titleJa: string;
+    backgroundImage?: string;
 }
 
-export const SubpageHero = ({ titleEn, titleJa }: SubpageHeroProps) => {
+export const SubpageHero = ({ titleEn, titleJa, backgroundImage }: SubpageHeroProps) => {
     return (
-        <div className="bg-[#064E3B] pt-32 pb-16 md:pt-40 md:pb-24 text-center relative overflow-hidden">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-400 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-                <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-300 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-            </div>
-            <div className="container mx-auto px-4 relative z-10">
-                <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-widest font-sans">{titleEn}</h1>
-                <p className="text-emerald-200/70 font-medium tracking-wider">{titleJa}</p>
+        <div className="relative pt-52 pb-24 md:pt-64 md:pb-32 overflow-hidden bg-[#064E3B]">
+            {backgroundImage && (
+                <div className="absolute inset-0 z-0">
+                    <img src={backgroundImage} alt="" className="w-full h-full object-cover opacity-50" />
+                    <div className="absolute inset-0 bg-black/40" />
+                </div>
+            )}
+            <div className="relative z-10 max-w-6xl mx-auto px-6">
+                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter mb-4 shadow-lg">
+                    {titleEn}
+                </h1>
+                <p className="text-white/90 text-lg md:text-xl font-bold tracking-widest pl-1">{titleJa}</p>
             </div>
         </div>
     );
