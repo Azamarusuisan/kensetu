@@ -12,18 +12,18 @@ export default function CompanyPage() {
             />
 
             {/* Mission Section */}
-            <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+            <section className="py-12 md:py-20 bg-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-[var(--color-secondary)] -skew-x-12 translate-x-1/4 -z-10" />
                 <div className="container mx-auto px-4 md:px-6">
-                    <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-20">
+                    <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12 mb-12">
                         <div className="w-full md:w-1/2">
                             <div className="relative">
                                 <p className="text-[var(--color-primary)] font-black tracking-widest text-sm md:text-base mb-3 md:mb-4">MISSION</p>
-                                <h2 className="text-3xl md:text-5xl font-black mb-6 md:mb-8 leading-tight text-[var(--color-text-primary)] tracking-tight">
+                                <h2 className="text-2xl md:text-4xl font-black mb-4 md:mb-6 leading-tight text-[var(--color-text-primary)] tracking-tight">
                                     可能性を解放し、<br />
                                     働くをもっと自由に。
                                 </h2>
-                                <p className="text-[var(--color-text-secondary)] leading-loose text-lg font-bold">
+                                <p className="text-[var(--color-text-secondary)] leading-relaxed text-base font-bold">
                                     私たちは、既成概念にとらわれず、すべての人が持つ無限の可能性を信じています。
                                     「働く」ということを、もっと自由で、もっとワクワクするものへ。
                                     一人ひとりが輝ける場所を創り出します。
@@ -42,16 +42,16 @@ export default function CompanyPage() {
                     </div>
 
                     {/* Vision */}
-                    <div className="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16 mb-20">
+                    <div className="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-12 mb-12">
                         <div className="w-full md:w-1/2">
                             <div className="relative">
                                 <p className="text-[var(--color-primary)] font-black tracking-widest text-sm md:text-base mb-3 md:mb-4">VISION</p>
-                                <h2 className="text-3xl md:text-5xl font-black mb-6 md:mb-8 leading-tight text-[var(--color-text-primary)] tracking-tight">
+                                <h2 className="text-2xl md:text-4xl font-black mb-4 md:mb-6 leading-tight text-[var(--color-text-primary)] tracking-tight">
                                     誰もが“自分の選択”で<br />
                                     キャリアを描ける<br />
                                     社会をつくる。
                                 </h2>
-                                <p className="text-[var(--color-text-secondary)] leading-loose text-lg font-bold">
+                                <p className="text-[var(--color-text-secondary)] leading-relaxed text-base font-bold">
                                     誰かに決められたレールではなく、自分自身で選び取る未来。
                                     私たちは、その選択肢を広げ、決断を支える存在でありたい。
                                     自律的なキャリア形成が当たり前の社会を目指します。
@@ -71,9 +71,9 @@ export default function CompanyPage() {
 
                     {/* Values (Action Guidelines) */}
                     <div className="mb-0">
-                        <div className="text-center mb-10 md:mb-16">
+                        <div className="text-center mb-6 md:mb-10">
                             <p className="text-[var(--color-primary)] font-black tracking-widest text-sm md:text-base mb-3 md:mb-4">VALUES</p>
-                            <h2 className="text-3xl md:text-5xl font-black text-[var(--color-text-primary)]">行動指針</h2>
+                            <h2 className="text-2xl md:text-4xl font-black text-[var(--color-text-primary)]">行動指針</h2>
                         </div>
 
                         <HorizontalScroll className="md:grid-cols-4">
@@ -109,16 +109,16 @@ export default function CompanyPage() {
             </section>
 
             {/* Top Message (New Section) */}
-            <section className="py-16 md:py-24 bg-[var(--color-secondary)]">
+            <section className="py-12 md:py-20 bg-[var(--color-secondary)]">
                 <div className="container mx-auto px-4 md:px-6">
-                    <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-[var(--color-border)]">
-                        <div className="text-center mb-8">
+                    <div className="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-sm border border-[var(--color-border)]">
+                        <div className="text-center mb-6">
                             <p className="text-[var(--color-primary)] font-bold tracking-widest text-sm mb-4">TOP MESSAGE</p>
                             <h2 className="text-2xl md:text-4xl font-black leading-tight text-[var(--color-text-primary)]">
                                 共に描き、共に創る未来。
                             </h2>
                         </div>
-                        <div className="space-y-6 text-[var(--color-text-secondary)] leading-loose text-lg font-bold">
+                        <div className="space-y-4 text-[var(--color-text-secondary)] leading-relaxed text-base font-bold">
                             <p>
                                 人の可能性は無限大です。<br />
                                 私たちは、スキルや経歴だけを見るマッチングは行いません。
@@ -144,9 +144,9 @@ export default function CompanyPage() {
             </section>
 
             {/* Company Overview */}
-            <section className="py-16 md:py-24 bg-white">
+            <section className="py-12 md:py-20 bg-white">
                 <div className="container mx-auto px-4 md:px-6">
-                    <div className="text-center mb-10 md:mb-16">
+                    <div className="text-center mb-8 md:mb-12">
                         <p className="text-[var(--color-primary)] font-bold tracking-widest text-sm mb-4">OVERVIEW</p>
                         <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)]">会社概要</h2>
                     </div>
