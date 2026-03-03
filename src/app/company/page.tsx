@@ -167,6 +167,8 @@ export default function CompanyPage() {
                                         { label: '住所', value: `〒${COMPANY_INFO.postalCode} ${COMPANY_INFO.address}` },
                                         { label: '資本金', value: COMPANY_INFO.capital },
                                         { label: '事業内容', value: COMPANY_INFO.business },
+                                        { label: 'TEL', value: COMPANY_INFO.phone },
+                                        { label: 'MAIL', value: COMPANY_INFO.email },
                                     ].map((row, index) => (
                                         <tr key={index} className="hover:bg-[var(--color-secondary)]/50 transition-colors flex flex-col md:table-row">
                                             <th className="px-6 md:px-8 py-4 md:py-5 text-left text-base font-extrabold text-[var(--color-text-primary)] w-full md:w-1/3 bg-[var(--color-secondary)]/50 block md:table-cell">{row.label}</th>
