@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { COMPANY_INFO } from '@/lib/metadata';
 
 interface ContactFormData {
     name: string;
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest) {
         // メール送信
         const { error } = await resend.emails.send({
             from: 'お問い合わせフォーム <onboarding@resend.dev>',
-            to: ['info@richandbuild.com'],
+            to: [COMPANY_INFO.email],
             subject: `【お問い合わせ】${body.category} - ${body.name}様`,
             html: `
                 <h2>お問い合わせがありました</h2>

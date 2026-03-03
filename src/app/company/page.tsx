@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { SubpageHero } from '@/components/SubpageHero';
 import { HorizontalScroll } from '@/components/ui/HorizontalScroll';
 import { ChevronRight } from 'lucide-react';
-import { PAGE_METADATA, SITE_URL } from '@/lib/metadata';
+import { PAGE_METADATA, SITE_URL, COMPANY_INFO } from '@/lib/metadata';
 import { JsonLd, generateBreadcrumbList, generateAboutPage } from '@/lib/jsonld';
 
 export const metadata: Metadata = {
@@ -162,11 +162,11 @@ export default function CompanyPage() {
                             <table className="w-full">
                                 <tbody className="divide-y divide-[var(--color-border)]">
                                     {[
-                                        { label: '会社名', value: '株式会社リッチ＆ビルド' },
-                                        { label: '代表者', value: '代表取締役 荒井 武志' },
-                                        { label: '住所', value: '〒150-0021 東京都渋谷区恵比寿西２丁目８－５ 高麗羅ビル2F' },
-                                        { label: '資本金', value: '2,000万円' },
-                                        { label: '事業内容', value: '総合人材コンサルティング事業' },
+                                        { label: '会社名', value: COMPANY_INFO.name },
+                                        { label: '代表者', value: `代表取締役 ${COMPANY_INFO.ceo}` },
+                                        { label: '住所', value: `〒${COMPANY_INFO.postalCode} ${COMPANY_INFO.address}` },
+                                        { label: '資本金', value: COMPANY_INFO.capital },
+                                        { label: '事業内容', value: COMPANY_INFO.business },
                                     ].map((row, index) => (
                                         <tr key={index} className="hover:bg-[var(--color-secondary)]/50 transition-colors flex flex-col md:table-row">
                                             <th className="px-6 md:px-8 py-4 md:py-5 text-left text-base font-extrabold text-[var(--color-text-primary)] w-full md:w-1/3 bg-[var(--color-secondary)]/50 block md:table-cell">{row.label}</th>

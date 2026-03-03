@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { SubpageHero } from '@/components/SubpageHero';
 import { Mail, Phone } from 'lucide-react';
-import { PAGE_METADATA, SITE_URL } from '@/lib/metadata';
+import { PAGE_METADATA, SITE_URL, COMPANY_INFO } from '@/lib/metadata';
 import { JsonLd, generateBreadcrumbList } from '@/lib/jsonld';
 
 export const metadata: Metadata = {
@@ -56,23 +56,23 @@ export default function PrivacyPage() {
                         ))}
 
                         <div className="bg-[var(--color-secondary)] p-6 rounded-xl mt-8">
-                            <p className="font-extrabold text-[var(--color-text-primary)] text-base mb-3">株式会社リッチ＆ビルド</p>
+                            <p className="font-extrabold text-[var(--color-text-primary)] text-base mb-3">{COMPANY_INFO.name}</p>
                             <div className="space-y-2 text-base text-[var(--color-text-secondary)]">
                                 <div className="flex items-center gap-2">
                                     <Mail className="w-4 h-4 text-[var(--color-primary)]" />
                                     <span className="font-bold">メール：</span>
-                                    <a href="mailto:info@richandbuild.com" className="hover:text-[var(--color-primary)] hover:underline transition-colors">
-                                        info@richandbuild.com
+                                    <a href={`mailto:${COMPANY_INFO.email}`} className="hover:text-[var(--color-primary)] hover:underline transition-colors">
+                                        {COMPANY_INFO.email}
                                     </a>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Phone className="w-4 h-4 text-[var(--color-primary)]" />
                                     <span className="font-bold">電話：</span>
-                                    <a href="tel:03-6277-5090" className="hover:text-[var(--color-primary)] hover:underline transition-colors">
-                                        03-6277-5090
+                                    <a href={`tel:${COMPANY_INFO.phone}`} className="hover:text-[var(--color-primary)] hover:underline transition-colors">
+                                        {COMPANY_INFO.phone}
                                     </a>
                                 </div>
-                                <p className="pl-6">担当：荒井 武志</p>
+                                <p className="pl-6">担当：{COMPANY_INFO.ceo}</p>
                             </div>
                         </div>
                     </div>
@@ -80,8 +80,8 @@ export default function PrivacyPage() {
                     <div className="mt-12 pt-6 border-t border-[var(--color-border)] text-right">
                         <p className="text-sm text-[var(--color-text-muted)]">
                             制定日：{new Date().getFullYear()}年1月1日<br />
-                            株式会社リッチ＆ビルド<br />
-                            代表取締役 荒井 武志
+                            {COMPANY_INFO.name}<br />
+                            代表取締役 {COMPANY_INFO.ceo}
                         </p>
                     </div>
                 </div>

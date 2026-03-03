@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { COMPANY_INFO } from '@/lib/metadata';
 
 const navItems = [
     { name: '会社案内', href: '/company' },
@@ -39,11 +40,11 @@ export const Footer = () => {
                             <div className="pt-3 space-y-2.5">
                                 <div className="flex items-center gap-2.5">
                                     <span className="text-xs uppercase font-extrabold tracking-widest bg-white/10 px-2 py-0.5 rounded text-white/70">Tel</span>
-                                    <a href="tel:03-6277-5090" className="hover:text-white transition-colors tracking-wide font-extrabold text-white/90">03-6277-5090</a>
+                                    <a href={`tel:${COMPANY_INFO.phone}`} className="hover:text-white transition-colors tracking-wide font-extrabold text-white/90">{COMPANY_INFO.phone}</a>
                                 </div>
                                 <div className="flex items-center gap-2.5">
                                     <span className="text-xs uppercase font-extrabold tracking-widest bg-white/10 px-2 py-0.5 rounded text-white/70">Mail</span>
-                                    <a href="mailto:info@richandbuild.com" className="hover:text-white transition-colors font-bold text-white/90 text-sm md:text-base break-all">info@richandbuild.com</a>
+                                    <a href={`mailto:${COMPANY_INFO.email}`} className="hover:text-white transition-colors font-bold text-white/90 text-sm md:text-base break-all">{COMPANY_INFO.email}</a>
                                 </div>
                             </div>
                         </div>
