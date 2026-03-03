@@ -39,11 +39,11 @@ export const Footer = () => {
                             <div className="pt-3 space-y-2.5">
                                 <div className="flex items-center gap-2.5">
                                     <span className="text-xs uppercase font-extrabold tracking-widest bg-white/10 px-2 py-0.5 rounded text-white/70">Tel</span>
-                                    <a href="tel:090-7797-6699" className="hover:text-white transition-colors tracking-wide font-extrabold text-white/90">090-7797-6699</a>
+                                    <a href="tel:03-6277-5090" className="hover:text-white transition-colors tracking-wide font-extrabold text-white/90">03-6277-5090</a>
                                 </div>
                                 <div className="flex items-center gap-2.5">
                                     <span className="text-xs uppercase font-extrabold tracking-widest bg-white/10 px-2 py-0.5 rounded text-white/70">Mail</span>
-                                    <a href="mailto:info@rich-and-build.co.jp" className="hover:text-white transition-colors font-bold text-white/90 text-sm md:text-base break-all">info@rich-and-build.co.jp</a>
+                                    <a href="mailto:info@richandbuild.com" className="hover:text-white transition-colors font-bold text-white/90 text-sm md:text-base break-all">info@richandbuild.com</a>
                                 </div>
                             </div>
                         </div>

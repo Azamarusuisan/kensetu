@@ -2,12 +2,16 @@
 
 import { SubpageHero } from '@/components/SubpageHero';
 import { Button } from '@/components/ui/Button';
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+
 export default function ContactPage() {
     const [agreed, setAgreed] = useState(false);
+    const [status, setStatus] = useState<FormStatus>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -27,6 +31,43 @@ export default function ContactPage() {
             transition: {
                 duration: 0.5
             }
+        }
+    };
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setStatus('submitting');
+        setErrorMessage('');
+
+        const form = e.currentTarget;
+        const formData = {
+            name: (form.elements.namedItem('name') as HTMLInputElement).value,
+            company: (form.elements.namedItem('company') as HTMLInputElement).value,
+            email: (form.elements.namedItem('email') as HTMLInputElement).value,
+            phone: (form.elements.namedItem('phone') as HTMLInputElement).value,
+            category: (form.elements.namedItem('category') as HTMLSelectElement).value,
+            message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+        };
+
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error || '送信に失敗しました。');
+            }
+
+            setStatus('success');
+            form.reset();
+            setAgreed(false);
+        } catch (err) {
+            setStatus('error');
+            setErrorMessage(err instanceof Error ? err.message : '送信に失敗しました。しばらくしてからもう一度お試しください。');
         }
     };
 
@@ -53,7 +94,31 @@ export default function ContactPage() {
                         </p>
                     </motion.div>
 
-                    <motion.form variants={itemVariants} className="bg-white p-5 md:p-10 rounded-2xl shadow-sm border border-[var(--color-border)]">
+                    {/* 送信完了メッセージ */}
+                    {status === 'success' && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="bg-green-50 border border-green-200 text-green-800 px-6 py-4 rounded-xl mb-8 text-center"
+                        >
+                            <p className="font-bold text-lg mb-1">送信が完了しました</p>
+                            <p className="text-sm">お問い合わせありがとうございます。担当者より3営業日以内にご連絡いたします。</p>
+                        </motion.div>
+                    )}
+
+                    {/* エラーメッセージ */}
+                    {status === 'error' && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-xl mb-8 text-center"
+                        >
+                            <p className="font-bold">送信に失敗しました</p>
+                            <p className="text-sm mt-1">{errorMessage}</p>
+                        </motion.div>
+                    )}
+
+                    <motion.form onSubmit={handleSubmit} variants={itemVariants} className="bg-white p-5 md:p-10 rounded-2xl shadow-sm border border-[var(--color-border)]">
                         <div className="space-y-6 md:space-y-8">
                             {/* Row 1: Name & Company */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -61,13 +126,13 @@ export default function ContactPage() {
                                     <label htmlFor="name" className="text-base font-extrabold text-[var(--color-text-primary)] block">
                                         お名前 <span className="text-[var(--color-primary)] ml-1">*</span>
                                     </label>
-                                    <input type="text" id="name" className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all placeholder:text-[var(--color-text-muted)]" placeholder="山田 太郎" />
+                                    <input type="text" id="name" name="name" required className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all placeholder:text-[var(--color-text-muted)]" placeholder="山田 太郎" />
                                 </div>
                                 <div className="space-y-2">
                                     <label htmlFor="company" className="text-base font-extrabold text-[var(--color-text-primary)] block">
                                         貴社名
                                     </label>
-                                    <input type="text" id="company" className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all placeholder:text-[var(--color-text-muted)]" placeholder="株式会社サンプル" />
+                                    <input type="text" id="company" name="company" className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all placeholder:text-[var(--color-text-muted)]" placeholder="株式会社サンプル" />
                                 </div>
                             </div>
 
@@ -77,13 +142,13 @@ export default function ContactPage() {
                                     <label htmlFor="email" className="text-base font-extrabold text-[var(--color-text-primary)] block">
                                         メールアドレス <span className="text-[var(--color-primary)] ml-1">*</span>
                                     </label>
-                                    <input type="email" id="email" className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all placeholder:text-[var(--color-text-muted)]" placeholder="example@email.com" />
+                                    <input type="email" id="email" name="email" required className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all placeholder:text-[var(--color-text-muted)]" placeholder="example@email.com" />
                                 </div>
                                 <div className="space-y-2">
                                     <label htmlFor="phone" className="text-base font-extrabold text-[var(--color-text-primary)] block">
                                         電話番号 <span className="text-[var(--color-primary)] ml-1">*</span>
                                     </label>
-                                    <input type="tel" id="phone" className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all placeholder:text-[var(--color-text-muted)]" placeholder="090-1234-5678" />
+                                    <input type="tel" id="phone" name="phone" required className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all placeholder:text-[var(--color-text-muted)]" placeholder="090-1234-5678" />
                                 </div>
                             </div>
 
@@ -93,7 +158,7 @@ export default function ContactPage() {
                                     お問い合わせ種別 <span className="text-[var(--color-primary)] ml-1">*</span>
                                 </label>
                                 <div className="relative">
-                                    <select id="category" className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all appearance-none text-[var(--color-text-primary)]">
+                                    <select id="category" name="category" className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all appearance-none text-[var(--color-text-primary)]">
                                         <option>人材に関するご相談</option>
                                         <option>採用について</option>
                                         <option>お見積もり依頼</option>
@@ -110,7 +175,7 @@ export default function ContactPage() {
                                 <label htmlFor="message" className="text-base font-extrabold text-[var(--color-text-primary)] block">
                                     お問い合わせ内容 <span className="text-[var(--color-primary)] ml-1">*</span>
                                 </label>
-                                <textarea id="message" rows={3} className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all resize-none placeholder:text-[var(--color-text-muted)] md:!h-[200px]" placeholder="お問い合わせ内容をご記入ください"></textarea>
+                                <textarea id="message" name="message" required rows={3} className="w-full px-4 py-3 md:py-4 text-base rounded-xl bg-[var(--color-secondary)] border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] outline-none transition-all resize-none placeholder:text-[var(--color-text-muted)] md:!h-[200px]" placeholder="お問い合わせ内容をご記入ください"></textarea>
                             </div>
 
                             {/* Privacy */}
@@ -144,11 +209,11 @@ export default function ContactPage() {
                                         type="submit"
                                         className={cn(
                                             "bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white px-12 py-4 rounded-full text-base font-extrabold tracking-wider min-w-full md:min-w-[300px] shadow-md hover:shadow-lg transition-all h-auto",
-                                            !agreed && "opacity-40 cursor-not-allowed hover:shadow-none"
+                                            (!agreed || status === 'submitting') && "opacity-40 cursor-not-allowed hover:shadow-none"
                                         )}
-                                        disabled={!agreed}
+                                        disabled={!agreed || status === 'submitting'}
                                     >
-                                        送信する
+                                        {status === 'submitting' ? '送信中...' : '送信する'}
                                     </Button>
                                 </motion.div>
                             </div>

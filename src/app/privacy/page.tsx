@@ -61,15 +61,15 @@ export default function PrivacyPage() {
                                 <div className="flex items-center gap-2">
                                     <Mail className="w-4 h-4 text-[var(--color-primary)]" />
                                     <span className="font-bold">メール：</span>
-                                    <a href="mailto:info@rich-and-build.co.jp" className="hover:text-[var(--color-primary)] hover:underline transition-colors">
-                                        info@rich-and-build.co.jp
+                                    <a href="mailto:info@richandbuild.com" className="hover:text-[var(--color-primary)] hover:underline transition-colors">
+                                        info@richandbuild.com
                                     </a>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Phone className="w-4 h-4 text-[var(--color-primary)]" />
                                     <span className="font-bold">電話：</span>
-                                    <a href="tel:090-7797-6699" className="hover:text-[var(--color-primary)] hover:underline transition-colors">
-                                        090-7797-6699
+                                    <a href="tel:03-6277-5090" className="hover:text-[var(--color-primary)] hover:underline transition-colors">
+                                        03-6277-5090
                                     </a>
                                 </div>
                                 <p className="pl-6">担当：荒井 武志</p>
