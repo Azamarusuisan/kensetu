@@ -165,6 +165,7 @@ export default function CompanyPage() {
                                         { label: '会社名', value: COMPANY_INFO.name },
                                         { label: '代表者', value: `代表取締役 ${COMPANY_INFO.ceo}` },
                                         { label: '住所', value: `〒${COMPANY_INFO.postalCode} ${COMPANY_INFO.address}` },
+                                        { label: '資本金', value: COMPANY_INFO.capital },
                                         { label: '事業内容', value: COMPANY_INFO.business },
                                         { label: 'TEL', value: COMPANY_INFO.phone },
                                         { label: 'MAIL', value: COMPANY_INFO.email },
