@@ -61,15 +61,26 @@
 - バックエンド: `src/app/api/contact/route.ts`（Resend API）
 - 送信先: `info@richandbuild.com`
 
-### 移行方針：Wix標準フォームへ移行予定
+### 移行方針：Resend → Gmail SMTP（Nodemailer）または SendGrid
 
-Wixへのサイト移行に伴い、お問い合わせフォームもWix標準機能で構築する方針です。
+送信元ドメイン `bcoups.com` はWixでDNS管理されているため、外部メール送信には以下のDNS設定が必要です。
 
-- **管理者通知**: Wixフォームの通知設定で `info@richandbuild.com` に送信
-- **自動返信（サンクスメール）**: Wixオートメーション機能で送信者に自動返信
-- **送信データ管理**: Wixダッシュボードの受信箱に自動保存（CSVエクスポート可）
+#### 選択肢
 
-外部メールサービス（SendGrid, Resend, Nodemailer等）は不要。Wix標準機能のみで完結します。
+| 方式 | メリット | DNS設定 |
+|------|---------|---------|
+| **Nodemailer + Gmail SMTP** | 無料、シンプル | WixのDNS管理画面でSPFにGmail用includeを追加 |
+| **SendGrid** | 高信頼性、無料枠100通/日 | WixのDNS管理画面でSPF + DKIM（CNAME）を追加 |
+
+#### Wix DNS で必要なレコード設定
+
+Wixダッシュボード → ドメイン → DNSレコードの管理 → TXTレコードで追加：
+
+- **SPF（Gmail）**: `v=spf1 include:_spf.google.com ~all`
+- **SPF（SendGrid）**: `v=spf1 include:sendgrid.net ~all`
+- **DKIM（SendGrid）**: SendGrid管理画面で発行されるCNAMEレコード2つをWix DNSに追加
+
+※ SPF/DKIM未設定の場合、送信メールがスパム判定されるリスクあり
 
 ## セットアップ
 
