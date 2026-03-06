@@ -51,6 +51,26 @@
 5. デプロイ後、Search Console で「確認」をクリック
 6. 左メニュー →「サイトマップ」→ `https://rich-and-build.co.jp/sitemap.xml` を送信
 
+## お問い合わせフォーム
+
+### 現状（Next.js版）
+
+現在は Next.js API Route + Resend でメール送信を実装しています。
+
+- フロントエンド: `src/app/contact/page.tsx`
+- バックエンド: `src/app/api/contact/route.ts`（Resend API）
+- 送信先: `info@richandbuild.com`
+
+### 移行方針：Wix標準フォームへ移行予定
+
+Wixへのサイト移行に伴い、お問い合わせフォームもWix標準機能で構築する方針です。
+
+- **管理者通知**: Wixフォームの通知設定で `info@richandbuild.com` に送信
+- **自動返信（サンクスメール）**: Wixオートメーション機能で送信者に自動返信
+- **送信データ管理**: Wixダッシュボードの受信箱に自動保存（CSVエクスポート可）
+
+外部メールサービス（SendGrid, Resend, Nodemailer等）は不要。Wix標準機能のみで完結します。
+
 ## セットアップ
 
 ```bash
