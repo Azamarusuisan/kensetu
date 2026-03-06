@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { useState, FormEvent } from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { COMPANY_INFO } from '@/lib/metadata';
+const CONTACT_EMAIL = 'info@richandbuild.com';
 
 export default function ContactPage() {
     const [agreed, setAgreed] = useState(false);
@@ -42,20 +42,19 @@ export default function ContactPage() {
         const category = (form.elements.namedItem('category') as HTMLSelectElement).value;
         const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value;
 
-        const subject = `【お問い合わせ】${category} - ${name}`;
-        const body = [
-            `お名前: ${name}`,
-            `貴社名: ${company || '—'}`,
-            `メールアドレス: ${email}`,
-            `電話番号: ${phone}`,
-            `お問い合わせ種別: ${category}`,
-            '',
-            '【お問い合わせ内容】',
-            message,
-        ].join('\n');
+        const subject = encodeURIComponent(`【お問い合わせ】${category} - ${name}`);
+        const body = encodeURIComponent(
+            `お名前: ${name}\n` +
+            `貴社名: ${company || '—'}\n` +
+            `メールアドレス: ${email}\n` +
+            `電話番号: ${phone}\n` +
+            `お問い合わせ種別: ${category}\n` +
+            `\n` +
+            `【お問い合わせ内容】\n` +
+            message
+        );
 
-        const mailtoUrl = `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = mailtoUrl;
+        window.open(`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`, '_blank');
     };
 
     return (
