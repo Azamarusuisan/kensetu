@@ -5,13 +5,10 @@ import { Button } from '@/components/ui/Button';
 import { useState, FormEvent } from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-
-type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+import { COMPANY_INFO } from '@/lib/metadata';
 
 export default function ContactPage() {
     const [agreed, setAgreed] = useState(false);
-    const [status, setStatus] = useState<FormStatus>('idle');
-    const [errorMessage, setErrorMessage] = useState('');
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -34,41 +31,31 @@ export default function ContactPage() {
         }
     };
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setStatus('submitting');
-        setErrorMessage('');
 
         const form = e.currentTarget;
-        const formData = {
-            name: (form.elements.namedItem('name') as HTMLInputElement).value,
-            company: (form.elements.namedItem('company') as HTMLInputElement).value,
-            email: (form.elements.namedItem('email') as HTMLInputElement).value,
-            phone: (form.elements.namedItem('phone') as HTMLInputElement).value,
-            category: (form.elements.namedItem('category') as HTMLSelectElement).value,
-            message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
-        };
+        const name = (form.elements.namedItem('name') as HTMLInputElement).value;
+        const company = (form.elements.namedItem('company') as HTMLInputElement).value;
+        const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+        const phone = (form.elements.namedItem('phone') as HTMLInputElement).value;
+        const category = (form.elements.namedItem('category') as HTMLSelectElement).value;
+        const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value;
 
-        try {
-            const res = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
+        const subject = `【お問い合わせ】${category} - ${name}`;
+        const body = [
+            `お名前: ${name}`,
+            `貴社名: ${company || '—'}`,
+            `メールアドレス: ${email}`,
+            `電話番号: ${phone}`,
+            `お問い合わせ種別: ${category}`,
+            '',
+            '【お問い合わせ内容】',
+            message,
+        ].join('\n');
 
-            const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.error || '送信に失敗しました。');
-            }
-
-            setStatus('success');
-            form.reset();
-            setAgreed(false);
-        } catch (err) {
-            setStatus('error');
-            setErrorMessage(err instanceof Error ? err.message : '送信に失敗しました。しばらくしてからもう一度お試しください。');
-        }
+        const mailtoUrl = `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoUrl;
     };
 
     return (
@@ -93,30 +80,6 @@ export default function ContactPage() {
                             担当者より3営業日以内にご連絡させていただきます。
                         </p>
                     </motion.div>
-
-                    {/* 送信完了メッセージ */}
-                    {status === 'success' && (
-                        <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="bg-green-50 border border-green-200 text-green-800 px-6 py-4 rounded-xl mb-8 text-center"
-                        >
-                            <p className="font-bold text-lg mb-1">送信が完了しました</p>
-                            <p className="text-sm">お問い合わせありがとうございます。担当者より3営業日以内にご連絡いたします。</p>
-                        </motion.div>
-                    )}
-
-                    {/* エラーメッセージ */}
-                    {status === 'error' && (
-                        <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-xl mb-8 text-center"
-                        >
-                            <p className="font-bold">送信に失敗しました</p>
-                            <p className="text-sm mt-1">{errorMessage}</p>
-                        </motion.div>
-                    )}
 
                     <motion.form onSubmit={handleSubmit} variants={itemVariants} className="bg-white p-5 md:p-10 rounded-2xl shadow-sm border border-[var(--color-border)]">
                         <div className="space-y-6 md:space-y-8">
@@ -209,11 +172,11 @@ export default function ContactPage() {
                                         type="submit"
                                         className={cn(
                                             "bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white px-12 py-4 rounded-full text-base font-extrabold tracking-wider min-w-full md:min-w-[300px] shadow-md hover:shadow-lg transition-all h-auto",
-                                            (!agreed || status === 'submitting') && "opacity-40 cursor-not-allowed hover:shadow-none"
+                                            !agreed && "opacity-40 cursor-not-allowed hover:shadow-none"
                                         )}
-                                        disabled={!agreed || status === 'submitting'}
+                                        disabled={!agreed}
                                     >
-                                        {status === 'submitting' ? '送信中...' : '送信する'}
+                                        メールで送信する
                                     </Button>
                                 </motion.div>
                             </div>

@@ -53,31 +53,14 @@
 
 ## お問い合わせフォーム
 
-### 現状（Next.js版）
+### 構成：mailto リンク方式
 
-現在は Next.js API Route + Resend でメール送信を実装しています。
+フォーム入力内容を `mailto:` リンクに埋め込み、ユーザーのメーラーを起動して送信する方式です。
 
 - フロントエンド: `src/app/contact/page.tsx`
-- バックエンド: `src/app/api/contact/route.ts`（Resend API）
+- バックエンド: なし（APIルート不要）
 - 送信先: `info@richandbuild.com`
-
-### 構成：SendGrid
-
-Resend から SendGrid に移行済み。送信元・送信先ともに `info@richandbuild.com`。
-
-- パッケージ: `@sendgrid/mail`
-- 環境変数: `SENDGRID_API_KEY`
-- ドメイン DNS は Wix で管理
-
-#### Wix DNS で必要なレコード設定
-
-SendGrid のドメイン認証のため、Wix ダッシュボード → ドメイン → DNSレコードの管理 で以下を設定：
-
-1. **SPF**: 既存の SPF レコードに `include:sendgrid.net` を追加（1行にまとめる）
-   - 例: `v=spf1 include:_spf.google.com include:sendgrid.net ~all`
-2. **DKIM**: SendGrid 管理画面で発行される CNAME レコード2つを追加
-
-※ SPF/DKIM 未設定の場合、送信メールがスパム判定されるリスクあり
+- 外部サービス・環境変数・DNS設定: すべて不要
 
 ## セットアップ
 
