@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import sgMail from '@sendgrid/mail';
 import { COMPANY_INFO } from '@/lib/metadata';
 
 interface ContactFormData {
@@ -11,9 +11,9 @@ interface ContactFormData {
     message: string;
 }
 
-export async function POST(request: NextRequest) {
-    const resend = new Resend(process.env.RESEND_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
+export async function POST(request: NextRequest) {
     try {
         const body: ContactFormData = await request.json();
 
@@ -25,11 +25,14 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // メール送信
-        const { error } = await resend.emails.send({
-            from: 'お問い合わせフォーム <onboarding@resend.dev>',
-            to: [COMPANY_INFO.email],
+        await sgMail.send({
+            from: {
+                email: COMPANY_INFO.email,
+                name: 'お問い合わせフォーム',
+            },
+            to: COMPANY_INFO.email,
             subject: `【お問い合わせ】${body.category} - ${body.name}様`,
+            replyTo: body.email,
             html: `
                 <h2>お問い合わせがありました</h2>
                 <table style="border-collapse: collapse; width: 100%; max-width: 600px;">
@@ -59,22 +62,13 @@ export async function POST(request: NextRequest) {
                     </tr>
                 </table>
             `,
-            replyTo: body.email,
         });
-
-        if (error) {
-            console.error('Resend error:', error);
-            return NextResponse.json(
-                { error: 'メール送信に失敗しました。しばらくしてからもう一度お試しください。' },
-                { status: 500 }
-            );
-        }
 
         return NextResponse.json({ success: true });
     } catch (err) {
         console.error('Contact API error:', err);
         return NextResponse.json(
-            { error: 'サーバーエラーが発生しました。' },
+            { error: 'メール送信に失敗しました。しばらくしてからもう一度お試しください。' },
             { status: 500 }
         );
     }

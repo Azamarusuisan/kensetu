@@ -61,26 +61,23 @@
 - バックエンド: `src/app/api/contact/route.ts`（Resend API）
 - 送信先: `info@richandbuild.com`
 
-### 移行方針：Resend → Gmail SMTP（Nodemailer）または SendGrid
+### 構成：SendGrid
 
-送信元ドメイン `bcoups.com` はWixでDNS管理されているため、外部メール送信には以下のDNS設定が必要です。
+Resend から SendGrid に移行済み。送信元・送信先ともに `info@richandbuild.com`。
 
-#### 選択肢
-
-| 方式 | メリット | DNS設定 |
-|------|---------|---------|
-| **Nodemailer + Gmail SMTP** | 無料、シンプル | WixのDNS管理画面でSPFにGmail用includeを追加 |
-| **SendGrid** | 高信頼性、無料枠100通/日 | WixのDNS管理画面でSPF + DKIM（CNAME）を追加 |
+- パッケージ: `@sendgrid/mail`
+- 環境変数: `SENDGRID_API_KEY`
+- ドメイン DNS は Wix で管理
 
 #### Wix DNS で必要なレコード設定
 
-Wixダッシュボード → ドメイン → DNSレコードの管理 → TXTレコードで追加：
+SendGrid のドメイン認証のため、Wix ダッシュボード → ドメイン → DNSレコードの管理 で以下を設定：
 
-- **SPF（Gmail）**: `v=spf1 include:_spf.google.com ~all`
-- **SPF（SendGrid）**: `v=spf1 include:sendgrid.net ~all`
-- **DKIM（SendGrid）**: SendGrid管理画面で発行されるCNAMEレコード2つをWix DNSに追加
+1. **SPF**: 既存の SPF レコードに `include:sendgrid.net` を追加（1行にまとめる）
+   - 例: `v=spf1 include:_spf.google.com include:sendgrid.net ~all`
+2. **DKIM**: SendGrid 管理画面で発行される CNAME レコード2つを追加
 
-※ SPF/DKIM未設定の場合、送信メールがスパム判定されるリスクあり
+※ SPF/DKIM 未設定の場合、送信メールがスパム判定されるリスクあり
 
 ## セットアップ
 
